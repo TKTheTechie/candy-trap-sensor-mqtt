@@ -58,7 +58,7 @@ async function run() {
   const WAIT_TIME = Number(process.env.WAIT_TIME) || 0;
   const WAIT_TIME_BETWEEN_ALERTS = Number(process.env.WAIT_TIME_BETWEEN_ALERTS) || 0;
 
-  const fetch = (await import('node-fetch')).default;
+  const { fetch } = await import('undici');
   proximitySensor.addProximityHandler(process.env.MIN_RANGE_CM, process.env.MAX_RANGE_CM, async measurement => {
     const now = Date.now();
     if (!firstEventPublished) {

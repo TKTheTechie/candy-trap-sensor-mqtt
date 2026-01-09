@@ -19,6 +19,7 @@
     "mqtt": "^3.0.0",
     "pi-io": "^1.0.2",
     "prettier": "^1.19.1",
-    "regenerator-runtime": "^0.13.3"
+    "regenerator-runtime": "^0.13.3",
+    "undici": "^7.18.2"
   }
 }
