@@ -6,19 +6,19 @@
   "author": "Andrew Roberts",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon --exec babel-node src/index.js"
+    "start": "nodemon src/index.js"
   },
   "devDependencies": {
-    "nodemon": "^3.1.11"
+    "nodemon": "^2.0.2"
   },
   "dependencies": {
     "core-js": "^3.6.4",
-    "dotenv": "^17.2.3",
-    "immer": "^11.1.3",
-    "johnny-five": "^2.1.0",
-    "mqtt": "^5.14.1",
-    "pi-io": "^1.1.1",
-    "prettier": "^3.7.4",
-    "regenerator-runtime": "^0.14.1"
+    "dotenv": "^8.2.0",
+    "immer": "^5.3.6",
+    "johnny-five": "^1.4.0",
+    "mqtt": "^3.0.0",
+    "pi-io": "^1.0.2",
+    "prettier": "^1.19.1",
+    "regenerator-runtime": "^0.13.3"
   }
 }
