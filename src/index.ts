@@ -22,12 +22,7 @@ let lastPublishTime = 0;
 const WAIT_TIME = 5000; // 5 seconds initial wait
 const WAIT_TIME_BETWEEN_ALERTS = 10000; // 10 seconds between alerts
 
-interface ProximityMeasurement {
-  cm: number;
-  in: number;
-}
-
-async function run(): Promise<void> {
+async function run() {
   // initialize and connect mqtt client
   const mqttClientConfig = {
     hostUrl: process.env.SOLACE_MQTT_HOST_URL!,
@@ -38,7 +33,7 @@ async function run(): Promise<void> {
 
   console.log("=== Starting MQTT producer ===");
 
-  let mqttClient: ReturnType<typeof MqttClient>;
+  let mqttClient: any;
 
   try {
     mqttClient = MqttClient(mqttClientConfig);
@@ -50,7 +45,7 @@ async function run(): Promise<void> {
     process.exit(1);
   }
 
-  let proximitySensor: ProximitySensor;
+  let proximitySensor: any;
 
   try {
     // Connect to the Raspberry PI
@@ -66,7 +61,7 @@ async function run(): Promise<void> {
   const minRange = parseInt(process.env.MIN_RANGE_CM || "0", 10);
   const maxRange = parseInt(process.env.MAX_RANGE_CM || "100", 10);
 
-  proximitySensor.addProximityHandler(minRange, maxRange, async (measurement: ProximityMeasurement) => {
+  proximitySensor.addProximityHandler(minRange, maxRange, async (measurement: any) => {
     const now = Date.now();
     
     if (!firstEventPublished) {

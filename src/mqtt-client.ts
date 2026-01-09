@@ -3,25 +3,13 @@
  * @author Andrew Roberts
  */
 
-import mqtt, { MqttClient as MqttClientType } from "mqtt";
+import mqtt from "mqtt";
 
-interface MqttClientConfig {
-  hostUrl: string;
-  username: string;
-  password: string;
-  clientId: string;
-}
-
-interface MqttClientInterface {
-  connect(): Promise<void>;
-  send(topic: string, message: string | Buffer, qos?: 0 | 1 | 2): Promise<void>;
-}
-
-function MqttClient({ hostUrl, username, password, clientId }: MqttClientConfig): MqttClientInterface {
-  let client: MqttClientType | null = null;
+function MqttClient({ hostUrl, username, password, clientId }: any) {
+  let client: any = null;
 
   // connects client to message broker and ensures connack is received
-  async function connect(): Promise<void> {
+  async function connect() {
     return new Promise((resolve, reject) => {
       client = mqtt.connect(hostUrl, {
         username: username,
@@ -29,16 +17,16 @@ function MqttClient({ hostUrl, username, password, clientId }: MqttClientConfig)
         clientId: clientId
       });
       client.on("connect", function onConnAck() {
-        resolve();
+        resolve(undefined);
       });
-      client.on("error", function onConnError(error: Error) {
+      client.on("error", function onConnError(error: any) {
         reject(error);
       });
     });
   }
 
   // publishes message to provided topic and ensures puback is received
-  async function send(topic: string, message: string | Buffer, qos: 0 | 1 | 2 = 0): Promise<void> {
+  async function send(topic: any, message: any, qos: any = 0) {
     return new Promise((resolve, reject) => {
       // guard: prevent attempting to interact with client that does not exist
       if (!client) {
@@ -50,10 +38,10 @@ function MqttClient({ hostUrl, username, password, clientId }: MqttClientConfig)
         topic,
         message,
         { qos }, // options
-        function onPubAck(err?: Error) {
+        function onPubAck(err: any) {
           // guard: err != null indicates client is disconnecting
           if (err) reject(err);
-          else resolve();
+          else resolve(undefined);
         }
       );
     });

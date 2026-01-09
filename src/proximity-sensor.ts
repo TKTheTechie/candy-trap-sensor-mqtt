@@ -8,21 +8,10 @@ import { Board, Proximity } from "johnny-five";
 // Since pi-io doesn't have TypeScript definitions, we'll use require and type it
 const PiIO = require("pi-io");
 
-interface ProximityMeasurement {
-  cm: number;
-  in: number;
-}
+class ProximitySensor {
+  private sensor: any = null;
 
-interface ProximitySensorInterface {
-  connectToBoard(): Promise<void>;
-  addProximityHandler(minRangeCm: number, maxRangeCm: number, handler: (measurement: ProximityMeasurement) => void): void;
-  addRangeDetectorHandler(minRangeCm: number, maxRangeCm: number, handler: () => void): void;
-}
-
-class ProximitySensor implements ProximitySensorInterface {
-  private sensor: Proximity | null = null;
-
-  async connectToBoard(): Promise<void> {
+  async connectToBoard() {
     return new Promise((resolve, reject) => {
       const board = new Board({
         io: new PiIO()
@@ -35,28 +24,24 @@ class ProximitySensor implements ProximitySensorInterface {
           echoPin: "GPIO24"
         });
 
-        resolve();
+        resolve(undefined);
       });
 
-      board.on("error", (error?: Error) => {
+      board.on("error", (error: any) => {
         reject(error || new Error("Unknown board error"));
       });
     });
   }
 
   // adds proximity sensor handler for a given range
-  addProximityHandler(
-    minRangeCm: number = 0, 
-    maxRangeCm: number, 
-    handler: (measurement: ProximityMeasurement) => void
-  ): void {
+  addProximityHandler(minRangeCm: any = 0, maxRangeCm: any, handler: any) {
     console.log(`Enabling range of proximity detection to be [${minRangeCm},${maxRangeCm}]cms`);
     
     if (!this.sensor) {
       throw new Error("Sensor not initialized. Call connectToBoard() first.");
     }
 
-    this.sensor.on("data", (measurement: ProximityMeasurement) => {
+    this.sensor.on("data", (measurement: any) => {
       if (measurement.cm > minRangeCm && measurement.cm < maxRangeCm) {
         handler(measurement);
       }
@@ -64,11 +49,7 @@ class ProximitySensor implements ProximitySensorInterface {
   }
 
   // adds range detector handler for a given range
-  addRangeDetectorHandler(
-    minRangeCm: number, 
-    maxRangeCm: number, 
-    handler: () => void
-  ): void {
+  addRangeDetectorHandler(minRangeCm: any, maxRangeCm: any, handler: any) {
     if (!this.sensor) {
       throw new Error("Sensor not initialized. Call connectToBoard() first.");
     }
