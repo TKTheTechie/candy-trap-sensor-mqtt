@@ -1,6 +1,10 @@
+/**
+ * mqtt-client.js
+ * @author Andrew Roberts
+ */
 
 import mqtt from "mqtt";
-import { produce } from "immer";
+import produce from "immer";
 
 function MqttClient({ hostUrl, username, password, clientId }) {
   let client = null;
@@ -11,6 +15,7 @@ function MqttClient({ hostUrl, username, password, clientId }) {
       client = mqtt.connect(hostUrl, {
         username: username,
         password: password,
+        clientId: clientId
       });
       client.on("connect", function onConnAck(connAck) {
         resolve();

@@ -3,11 +3,10 @@
  * @author Thomas Kunnumpurath
  */
 
-import {produce} from "immer";
+import produce from "immer";
 
-import pkg from "johnny-five";
-const { Board, Proximity } = pkg;
-import PiIO from "pi-io";
+import { Board, Proximity } from "johnny-five";
+const PiIO = require("pi-io");
 
 let sensor = null;
 
