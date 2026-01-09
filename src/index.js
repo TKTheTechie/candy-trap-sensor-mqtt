@@ -14,8 +14,8 @@ let result = dotenv.config();
 if (result.error) {
   throw result.error;
 }
-import MqttClient from "./mqtt-client";
-import ProximitySensor from "./proximity-sensor";
+import MqttClient from "./mqtt-client.js";
+import ProximitySensor from "./proximity-sensor.js";
 
 async function run() {
   // initialize and connect mqtt client
