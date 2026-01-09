@@ -3,9 +3,7 @@
  * @author Thomas Kunnumpurath
  */
 
-import { Board, Proximity } from "johnny-five";
-
-// Since pi-io doesn't have TypeScript definitions, we'll use require and type it
+const { Board, Proximity } = require("johnny-five");
 const PiIO = require("pi-io");
 
 class ProximitySensor {
