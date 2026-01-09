@@ -1,5 +1,4 @@
-# raspberry-pi-ultrasonic-sensor-mqtt
-
+# CANDY-TRAP-SENSOR-MQTT
 A demo app that integrates an HCSR04 proximity sensor on a Raspberry PI with an MQTT publisher
 
 ## Setup instructions
