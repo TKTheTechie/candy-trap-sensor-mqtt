@@ -5,11 +5,11 @@
  */
 
 // load env variables
-import dotenv from "dotenv";
+const dotenv = require("dotenv");
 import fetch from "node-fetch";
 
 const result = dotenv.config();
-if (result.error) {
+if (result.error && result.error.code !== 'ENOENT') {
   throw result.error;
 }
 
