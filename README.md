@@ -1,6 +1,8 @@
 # CANDY-TRAP-SENSOR-MQTT
 A demo app that integrates an HCSR04 proximity sensor on a Raspberry PI with an MQTT publisher
 
+**Note: This project has been converted to TypeScript for better type safety and development experience.**
+
 ## Setup instructions
 
 The following items will need to be purchased to assemble this kit:
@@ -37,11 +39,20 @@ do the following:
 - Fill in the Solace connectivity in the .env file with details from Solace Cloud Console's Connection tab ![Solace Cloud Details](https://raw.githubusercontent.com/solacese/solace-js-mqtt-postgres-blog/master/docs/mqtt-conn-details.png)
 - Specify the range (in centimeters) that you would want to have an event be published onto Solace in the .env file as well
 
-## Running the code
+## Building and Running the code
 
-Use the following command to run the application,
+Since this is now a TypeScript project, you need to build it first:
 
-`sudo npm run start`
+```bash
+# Build the TypeScript code
+npm run build
+
+# Run the compiled JavaScript
+sudo npm run start
+
+# Or for development with auto-restart
+npm run dev
+```
 
 If successful, you should see the following output:
 
@@ -59,3 +70,13 @@ Distance measurement: {"cm":18.299,"centimeters":18.299,"in":7.14,"inches":7.14}
 ```
 
 In addition, the distance will be published on the topic `SOLACE/DISTANCE/MEASUREMENT` for applications to subscribe to.
+
+## TypeScript Features
+
+This project now includes:
+- Full TypeScript type safety
+- Custom type definitions for johnny-five and pi-io libraries
+- Proper error handling with typed exceptions
+- Modern ES2020 features with backward compatibility
+- Source maps for debugging
+- Declaration files for library usage

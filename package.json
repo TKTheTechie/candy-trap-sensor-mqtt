@@ -2,28 +2,26 @@
   "name": "raspberry-pi-ultrasonic-sesnor-mqtt",
   "version": "1.0.0",
   "description": "bare bones MQTT producer",
-  "main": "index.js",
+  "main": "dist/index.js",
   "author": "Andrew Roberts",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon --exec babel-node src/index.js"
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "nodemon --exec ts-node src/index.ts",
+    "clean": "rm -rf dist"
   },
   "devDependencies": {
-    "@babel/cli": "^7.8.3",
-    "@babel/core": "^7.8.3",
-    "@babel/node": "^7.8.4",
-    "@babel/preset-env": "^7.8.3",
-    "nodemon": "^3.1.11"
+    "@types/node": "^20.0.0",
+    "nodemon": "^3.1.11",
+    "ts-node": "^10.9.0",
+    "typescript": "^5.0.0"
   },
   "dependencies": {
-    "core-js": "^3.6.4",
-    "dotenv": "^8.2.0",
-    "immer": "^5.3.6",
-    "johnny-five": "^1.4.0",
-    "mqtt": "^3.0.0",
+    "dotenv": "^16.0.0",
+    "johnny-five": "^2.1.0",
+    "mqtt": "^5.0.0",
     "node-fetch": "^3.3.2",
-    "pi-io": "^1.0.2",
-    "prettier": "^1.19.1",
-    "regenerator-runtime": "^0.13.3"
+    "pi-io": "^1.0.2"
   }
 }
